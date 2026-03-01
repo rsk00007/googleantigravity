@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio | Web Developer</title>
+  <meta name="description" content="スピードとデザインのSTUDIO、運用・拡張性のWordPressの二刀流による最適なWeb制作。">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600&family=Zen+Kaku+Gothic+New:wght@300;400;500&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  
+  <header class="header">
+    <div class="header-inner">
+      <h1 class="logo"><a href="#">Portfolio</a></h1>
+      <nav class="nav">
+        <ul>
+          <li><a href="#service">Service</a></li>
+          <li><a href="#works">Works</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Main Visual -->
+    <section id="hero" class="hero-section">
+      <div id="matter-canvas" class="matter-canvas"></div>
+      <div class="hero-content">
+        <h2 class="hero-title">Technical <br>Creativity.</h2>
+      </div>
+    </section>
+
+    <!-- Catch Copy -->
+    <section id="catch-copy" class="catch-copy-section fade-in">
+      <div class="container">
+        <h2 class="catch-text">ビジネスを加速させる<br>Web制作</h2>
+        <p class="catch-desc">
+          あなたのビジネスの魅力を最大限に引き出し、<br>
+          結果につなげるための技術パートナーとして伴走します。
+        </p>
+      </div>
+    </section>
+
+    <!-- Service -->
+    <section id="service" class="service-section fade-in">
+      <div class="container">
+        <h2 class="section-title">Service</h2>
+        <div class="service-grid">
+          <div class="service-card">
+            <h3>STUDIO</h3>
+            <p>スピード・デザイン重視</p>
+            <span class="desc">デザインから実装までをシームレスに行い、高品質なサイトを短納期で提供します。ランディングページやコーポレートサイトに最適です。</span>
+          </div>
+          <div class="service-card">
+            <h3>WordPress</h3>
+            <p>運用・拡張性重視</p>
+            <span class="desc">ブログやニュース更新など、自社での運用が必要な場合に適したCMS構築。柔軟なカスタマイズでビジネスの成長に合わせた拡張が可能です。</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Works -->
+    <section id="works" class="works-section fade-in">
+      <div class="container">
+        <h2 class="section-title">Works</h2>
+        <div class="works-grid">
+          <article class="work-card">
+            <div class="work-img-placeholder">Sample LP 1</div>
+            <div class="work-info">
+              <h3>Fictional LP - Tech Startup</h3>
+              <p>モダンで洗練されたデザインと、スクロールに連動するアニメーションで先進性を表現。</p>
+              <ul class="tags">
+                <li>STUDIO</li>
+                <li>Design</li>
+              </ul>
+            </div>
+          </article>
+          <article class="work-card">
+            <div class="work-img-placeholder">Sample HP 2</div>
+            <div class="work-info">
+              <h3>Fictional Corporate - Cafe</h3>
+              <p>温かみのあるタイポグラフィと余白を活かし、ブランドの世界観を伝える構成。</p>
+              <ul class="tags">
+                <li>WordPress</li>
+                <li>HTML/CSS/JS</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="about-section fade-in">
+      <div class="container">
+        <h2 class="section-title">About</h2>
+        <div class="about-content">
+          <div class="profile-info">
+            <h3>Web Developer</h3>
+            <p>デザインの意図を汲み取り、それを正確かつ美しく画面上に表現するコーディングを得意としています。<br>「魅せる」アニメーション実装と、「運用しやすい」システム構築の両輪でサポートします。</p>
+          </div>
+          <div class="skills">
+            <h4>Skill Stack</h4>
+            <ul class="skill-list">
+              <li>HTML5 / CSS3</li>
+              <li>JavaScript (ES6+)</li>
+              <li>WordPress (PHP)</li>
+              <li>STUDIO</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="contact-section fade-in">
+      <div class="container">
+        <h2 class="section-title">Contact</h2>
+        <p class="contact-desc">Web制作に関するご相談、お見積りなどお気軽にお問い合わせください。</p>
+        
+        <form class="contact-form">
+          <div class="form-group">
+            <label for="name">お名前</label>
+            <input type="text" id="name" name="name" required placeholder="山田 太郎">
+          </div>
+          <div class="form-group">
+            <label for="email">メールアドレス</label>
+            <input type="email" id="email" name="email" required placeholder="example@example.com">
+          </div>
+          <div class="form-group">
+            <label for="message">お問い合わせ内容</label>
+            <textarea id="message" name="message" rows="5" required placeholder="ご相談内容をご記入ください"></textarea>
+          </div>
+          <button type="submit" class="submit-btn" onclick="event.preventDefault();">送信する</button>
+        </form>
+
+        <div class="external-link">
+          <p>ココナラ経由でのご依頼はこちら</p>
+          <a href="#" class="coconala-btn">ココナラで相談する</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 Web Developer Portfolio. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+  <script src="js/matter-hero.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

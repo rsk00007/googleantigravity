@@ -1,0 +1,542 @@
+@charset "UTF-8";
+
+/* =========================================================================
+   Variables & Resets
+   ========================================================================= */
+:root {
+    --color-bg: #fafafa;
+    --color-text-main: #222222;
+    --color-text-muted: #666666;
+    --color-accent: #111111;
+    --color-border: #e0e0e0;
+    --color-white: #ffffff;
+
+    --font-serif: 'Noto Serif JP', serif;
+    --font-sans: 'Zen Kaku Gothic New', sans-serif;
+
+    --spacing-section: 120px;
+    --spacing-container: clamp(20px, 5vw, 60px);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-sans);
+    color: var(--color-text-main);
+    background-color: var(--color-bg);
+    line-height: 1.8;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+a:hover {
+    opacity: 0.6;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+}
+
+.container {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-container);
+}
+
+section {
+    padding: var(--spacing-section) 0;
+}
+
+/* =========================================================================
+   Typography & Shared utilities
+   ========================================================================= */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 400;
+}
+
+.section-title {
+    font-family: var(--font-serif);
+    font-size: 2.5rem;
+    letter-spacing: 0.05em;
+    margin-bottom: 60px;
+    text-align: center;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 40px;
+    background-color: var(--color-text-main);
+    margin: 20px auto 0;
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.fade-in.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =========================================================================
+   Header
+   ========================================================================= */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    background: rgba(250, 250, 250, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    padding: 0 var(--spacing-container);
+}
+
+.logo a {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+}
+
+.nav ul {
+    display: flex;
+    gap: 40px;
+}
+
+.nav a {
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+}
+
+/* =========================================================================
+   Hero (Matter.js)
+   ========================================================================= */
+.hero-section {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-bg);
+    padding: 0;
+}
+
+.hero-content {
+    position: absolute;
+    z-index: 10;
+    pointer-events: none;
+    /* Let clicks pass to matter.js canvas */
+}
+
+.hero-title {
+    font-family: var(--font-serif);
+    font-size: clamp(3rem, 8vw, 6rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--color-text-main);
+    text-align: center;
+    text-shadow: 0 4px 10px rgba(250, 250, 250, 0.8);
+}
+
+/* Container for Matter physics elements */
+.matter-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.matter-el {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 12px 24px;
+    background-color: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: 40px;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-text-main);
+    user-select: none;
+    cursor: grab;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    transform-origin: center center;
+    white-space: nowrap;
+    /* Optimization */
+    will-change: transform;
+}
+
+.matter-el:active {
+    cursor: grabbing;
+}
+
+.matter-el[data-type="accent"] {
+    background-color: var(--color-accent);
+    color: var(--color-white);
+    border-color: var(--color-accent);
+}
+
+/* Canvas itself created by Matter needs to be behind HTML elements and invisible or just acting as interaction layer */
+.matter-canvas canvas {
+    opacity: 0;
+    /* We only use it for physics logic / debug can be set to 1 */
+    cursor: grab;
+}
+
+.matter-canvas canvas:active {
+    cursor: grabbing;
+}
+
+/* =========================================================================
+   Catch Copy
+   ========================================================================= */
+.catch-copy-section {
+    text-align: center;
+    background-color: var(--color-white);
+}
+
+.catch-text {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.4;
+    margin-bottom: 40px;
+    letter-spacing: 0.05em;
+}
+
+.catch-desc {
+    color: var(--color-text-muted);
+    font-size: clamp(1rem, 2vw, 1.1rem);
+    line-height: 2;
+    letter-spacing: 0.03em;
+}
+
+/* =========================================================================
+   Service
+   ========================================================================= */
+.service-section {
+    background-color: var(--color-bg);
+}
+
+.service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 40px;
+}
+
+.service-card {
+    background: var(--color-white);
+    padding: 60px 40px;
+    border: 1px solid var(--color-border);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.03);
+}
+
+.service-card h3 {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.service-card p {
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--color-text-main);
+    margin-bottom: 30px;
+    letter-spacing: 0.1em;
+}
+
+.service-card .desc {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+    line-height: 1.8;
+}
+
+/* =========================================================================
+   Works
+   ========================================================================= */
+.works-section {
+    background-color: var(--color-white);
+}
+
+.works-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+}
+
+.work-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.work-card:nth-child(even) .work-img-placeholder {
+    order: 2;
+}
+
+.work-card:nth-child(even) .work-info {
+    order: 1;
+}
+
+.work-img-placeholder {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-muted);
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    letter-spacing: 0.1em;
+    border: 1px solid var(--color-border);
+}
+
+.work-info h3 {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+.work-info p {
+    color: var(--color-text-muted);
+    margin-bottom: 30px;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.tags li {
+    font-size: 0.8rem;
+    padding: 5px 15px;
+    border: 1px solid var(--color-border);
+    border-radius: 20px;
+    color: var(--color-text-muted);
+}
+
+/* =========================================================================
+   About
+   ========================================================================= */
+.about-section {
+    background-color: var(--color-bg);
+}
+
+.about-content {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 60px;
+}
+
+.profile-info h3 {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.profile-info p {
+    color: var(--color-text-muted);
+}
+
+.skills h4 {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.skill-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.skill-list li {
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-text-main);
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+}
+
+/* =========================================================================
+   Contact
+   ========================================================================= */
+.contact-section {
+    background-color: var(--color-white);
+    text-align: center;
+}
+
+.contact-desc {
+    margin-bottom: 60px;
+    color: var(--color-text-muted);
+}
+
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto 60px;
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 30px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-bg);
+    font-family: inherit;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-text-main);
+}
+
+.submit-btn {
+    display: inline-block;
+    width: 100%;
+    padding: 20px;
+    background-color: var(--color-text-main);
+    color: var(--color-white);
+    border: none;
+    font-family: inherit;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #444;
+}
+
+.external-link {
+    padding-top: 60px;
+    border-top: 1px solid var(--color-border);
+}
+
+.external-link p {
+    margin-bottom: 20px;
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+}
+
+.coconala-btn {
+    display: inline-block;
+    padding: 15px 40px;
+    border: 1px solid var(--color-accent);
+    color: var(--color-accent);
+    background-color: transparent;
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
+}
+
+.coconala-btn:hover {
+    background-color: var(--color-accent);
+    color: var(--color-white);
+}
+
+/* =========================================================================
+   Footer
+   ========================================================================= */
+.footer {
+    padding: 40px 0;
+    text-align: center;
+    background-color: var(--color-bg);
+    color: var(--color-text-muted);
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+}
+
+/* =========================================================================
+   Responsive
+   ========================================================================= */
+@media (max-width: 768px) {
+    .nav {
+        display: none;
+        /* simple hidden on mobile, normally needs a hamburger menu */
+    }
+
+    .work-card {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .work-card:nth-child(even) .work-img-placeholder,
+    .work-card:nth-child(even) .work-info {
+        order: initial;
+    }
+
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+}
